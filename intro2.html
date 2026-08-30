@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi proyecto</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #061f27;
+        }
+
+        /* =========================
+           INTRO
+        ========================= */
+
+        #intro {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #061f27;
+
+            transition:
+                opacity .8s ease,
+                visibility .8s ease;
+        }
+
+        #intro img {
+            width: 159px;
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+
+        #intro.ocultar {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.08);
+                opacity: .75;
+            }
+        }
+
+
+        /* =========================
+           CONTENIDO
+        ========================= */
+
+        #pagina {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 580px;
+
+            background: white;
+            border-radius: 16px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, .25);
+        }
+
+
+        /* =========================
+           PASOS
+        ========================= */
+
+        .paso {
+            display: none;
+        }
+
+        .paso.activo {
+            display: block;
+        }
+
+        .numero-paso {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 26px;
+            color: #111;
+        }
+
+        .descripcion {
+            color: #555;
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           INPUTS
+        ========================= */
+
+        .campo {
+            margin-top: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            height: 52px;
+
+            border: 1px solid #aaa;
+            border-radius: 6px;
+
+            padding: 0 15px;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #111;
+        }
+
+
+        /* =========================
+           BOTÓN
+        ========================= */
+
+        button {
+            width: 100%;
+            height: 52px;
+
+            margin-top: 25px;
+
+            border: 0;
+            border-radius: 28px;
+
+            background: #111;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #333;
+        }
+
+
+        /* =========================
+           CORREO DEL PASO 2
+        ========================= */
+
+        .correo {
+            margin-top: 20px;
+
+            padding: 13px 15px;
+
+            background: #f2f2f2;
+            border-radius: 6px;
+
+            color: #333;
+        }
+
+        .volver {
+            margin-top: 15px;
+
+            background: transparent;
+            color: #111;
+
+            border: 1px solid #aaa;
+        }
+
+        .volver:hover {
+            background: #eee;
+        }
+
+
+        /* =========================
+           PAGINA FINAL
+        ========================= */
+
+        #final {
+            display: none;
+            text-align: center;
+        }
+
+        #final.activo {
+            display: block;
+        }
+
+        #final h1 {
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================
+         INTRO
+    ====================================== -->
+
+    <div id="intro">
+
+        <img
+            src="/assets/logo-C4Sr8ukq.webp"
+            alt="Logo"
+        >
+
+    </div>
+
+
+    <!-- =====================================
+         PAGINA
+    ====================================== -->
+
+    <main id="pagina">
+
+        <div class="card">
+
+
+            <!-- ===============================
+                 PASO 1
+            ================================ -->
+
+            <section
+                id="paso1"
+                class="paso activo"
+            >
+
+                <div class="numero-paso">
+                    Paso 1
+                </div>
+
+                <h1>
+                    Ingrese su dirección de correo electrónico
+                </h1>
+
+                <p class="descripcion">
+                    Introduzca su correo electrónico para continuar.
+                </p>
+
+
+                <div class="campo">
+
+                    <label for="email">
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        id="email"
+                        type="email"
+                        autocomplete="off"
+                        placeholder="Correo electrónico"
+                    >
+
+                </div>
+
+
+                <button id="continuar">
+                    Continuar
+                </button>
+
+            </section>
+
+
+
+            <!-- ===============================
+                 PASO 2
+            ================================ -->
+
+            <section
+                id="paso2"
+                class="paso"
+            >
+
+                <div class="numero-paso">
+                    Paso 2
+                </div>
+
+                <h1>
+                    Ingrese su contraseña
+                </h1>
+
+                <p class="descripcion">
+                    Inicie sesión en su cuenta.
+                </p>
+
+
+                <!-- Se muestra el correo introducido -->
+                <div
+                    id="correoMostrado"
+                    class="correo"
+                ></div>
+
+
+                <div class="campo">
+
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+                    <input
+                        id="password"
+                        type="password"
+                        autocomplete="off"
+                        placeholder="Contraseña"
+                    >
+
+                </div>
+
+
+                <button id="iniciarSesion">
+                    Iniciar sesión
+                </button>
+
+
+                <button
+                    id="volver"
+                    class="volver"
+                    type="button"
+                >
+                    Volver
+                </button>
+
+            </section>
+
+
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        /* =====================================
+           INTRO
+        ====================================== */
+
+        window.addEventListener("load", () => {
+
+            setTimeout(() => {
+
+                document
+                    .getElementById("intro")
+                    .classList
+                    .add("ocultar");
+
+            }, 2500);
+
+        });
+
+
+
+        /* =====================================
+           ELEMENTOS
+        ====================================== */
+
+        const paso1 =
+            document.getElementById("paso1");
+
+        const paso2 =
+            document.getElementById("paso2");
+
+
+        const email =
+            document.getElementById("email");
+
+        const password =
+            document.getElementById("password");
+
+        const correoMostrado =
+            document.getElementById("correoMostrado");
+
+        const continuar =
+            document.getElementById("continuar");
+
+        const iniciarSesion =
+            document.getElementById("iniciarSesion");
+
+        const volver =
+            document.getElementById("volver");
+
+
+
+        /* =====================================
+           PASO 1 → PASO 2
+        ====================================== */
+
+        continuar.addEventListener("click", () => {
+
+            const correo =
+                email.value.trim();
+
+
+            if (!correo) {
+
+                alert(
+                    "Ingrese un correo electrónico."
+                );
+
+                return;
+            }
+
+
+            if (!email.checkValidity()) {
+
+                alert(
+                    "Ingrese un correo electrónico válido."
+                );
+
+                return;
+            }
+
+
+            /*
+             * Solamente guardamos el correo
+             * en una variable para mostrarlo
+             * en el Paso 2.
+             */
+
+            correoMostrado.textContent =
+                correo;
+
+
+            paso1.classList.remove("activo");
+
+            paso2.classList.add("activo");
+
+        });
+
+
+
+        /* =====================================
+           VOLVER
+        ====================================== */
+
+        volver.addEventListener("click", () => {
+
+            paso2.classList.remove("activo");
+
+            paso1.classList.add("activo");
+
+        });
+
+
+
+        /* =====================================
+           INICIAR SESIÓN
+        ====================================== */
+
+      iniciarSesion.addEventListener("click", () => {
+
+    if (!password.value) {
+
+        alert(
+            "Ingrese una contraseña."
+        );
+
+        return;
+    }
+
+
+    window.location.href = "prueba.html";
+
+});
+
+    </script>
+
+</body>
+</html>
